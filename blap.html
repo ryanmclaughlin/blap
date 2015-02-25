@@ -1,0 +1,47 @@
+<head>
+    <meta charset="UTF-8">
+    <title>Blap</title>
+    <meta name="description" content="My template">
+
+    <link rel="stylesheet" href="/css/normalize.css">
+
+</head>
+
+<body>
+  <h1>Blap</h1>
+
+  {{> formUpload}}
+</body>
+
+<template name="formUpload">
+
+  <form class="form-converter" action="https://api.cloudconvert.com/convert" method="POST" enctype="multipart/form-data">
+    <input type="hidden" name="apikey" value="GUpX7rmee0taJkyGRACH282cwcguZERXcGVFeexwOlP-Vr-9riTzdcsuczLE_2KrlWj22DD9PFdqSMZbtrcv1g">
+    <input type="hidden" name="input" value="upload">
+    <input type="hidden" name="download" value="inline">
+    <input type="hidden" name="save" value="true">
+    <input type="hidden" name="inputformat" value="mp4">
+    <input type="hidden" name="outputformat" value="mp3">
+
+    <div>
+      <input type="file" name="file">
+    </div>
+
+    <br>
+
+    <div>
+      <label for="converteroptions[trim_from]">Trim Start</label>
+      <input type="text" name="converteroptions[trim_from]" placeholder="0s">
+    </div>
+
+    <div>
+      <label for="converteroptions[trim_to]">Trim To</label>
+      <input type="text" name="converteroptions[trim_to]" placeholder="0s">
+    </div>
+
+    <br>
+
+    <input type="submit" value="Blap this">
+  </form>
+
+</template>
