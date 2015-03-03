@@ -11,10 +11,13 @@ Template.formUpload.events({
     renderVideo(event.target.files[0]);
   },
 
-  'click #test': function (event) {
-    var url = 'https://www.youtube.com/watch?v=kBwjxBmMszQ';
+  'change .video-url': function (event) {
+    var url = event.target.value;
+
     Meteor.call('saveDeo', url, function(error, result) {
       if (!error) {
+        var mp4Link = result.data.formats[0].url;
+        Session.set('videoPreviewSource', mp4Link);
         return console.log(result);
       }
     });
