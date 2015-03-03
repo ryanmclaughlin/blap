@@ -16,13 +16,3 @@ if (Meteor.isServer) {
 
   });
 }
-
-
-// var config  = __dirname + '/config.yml',
-//     file    = __dirname + '/smaug.mp4';
-
-// var $task   = new CloudConvert(config).convert(file).from('mp4').into('mp3').process();
-
-// $task.when('uploading', function(data) {
-//     console.log("We're uploading our file...");
-// });

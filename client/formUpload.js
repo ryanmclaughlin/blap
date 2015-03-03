@@ -9,6 +9,15 @@ Template.formUpload.events({
 
   'change input[type="file"]': function (event) {
     renderVideo(event.target.files[0]);
+  },
+
+  'click #test': function (event) {
+    var url = 'https://www.youtube.com/watch?v=kBwjxBmMszQ';
+    Meteor.call('saveDeo', url, function(error, result) {
+      if (!error) {
+        return console.log(result);
+      }
+    });
   }
 
 });
