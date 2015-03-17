@@ -4,13 +4,9 @@ if (Meteor.isServer) {
 
   Meteor.methods({
 
-    cloudConvert: function () {
-      var response = HTTP.get(api_endpoint, {
-        params: {
-          inputformat: 'mp4',
-          outputformat: 'mp3',
-          input: 'upload'
-        }
+    cloudConvert: function (inputParams) {
+      var response = HTTP.post(api_endpoint, {
+        params: inputParams
       });
     }
 

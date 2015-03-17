@@ -2,8 +2,7 @@ var api_key = 'C275dx9HxKmshCVEbPliHaTNVE3Xp1fFSJcjsnOxTpqSAhuOh4';
 var api_endpoint = 'https://savedeo.p.mashape.com/download';
 
 Meteor.methods({
-
-  saveDeo: function (url_link) {
+  saveDeo: function (urlLink) {
     var response = HTTP.post(api_endpoint, {
       headers: {
         'X-Mashape-Key': api_key,
@@ -11,12 +10,9 @@ Meteor.methods({
         'Accept': 'application/json'
       },
       params: {
-        url: url_link
+        url: urlLink
       }
-
     });
-
     return response;
   }
-
 });
