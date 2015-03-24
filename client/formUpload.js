@@ -16,6 +16,8 @@ Template.formUpload.events({
     if (!videoUrlInput.val()) {
       input = 'upload';
       file = $form.find('.convert-form__input-file').files[0];
+    } else {
+      file = Session.get('videoPreviewSource');
     }
 
     var params = {
@@ -25,10 +27,12 @@ Template.formUpload.events({
       'file': file,
       'download': 'inline',
       'converteroptions[trim_from]': trimFrom,
-      'converteroptions[trim_to]': trimTo
+      'converteroptions[trim_to]': trimTo,
+      'save': true
     };
 
     console.log(params);
+
 
     Meteor.call('cloudConvert', params, function(error, result) {
       if (!error) {
@@ -49,15 +53,20 @@ Template.formUpload.events({
 
   'change .convert-form__video-url': function (event) {
     var url = event.target.value;
+    var extension = url.substr((~-url.lastIndexOf(".") >>> 0) + 2);
+    var extensionList = ['mp4', 'avi', 'mpeg', 'wmv', 'mov'];
 
-    Meteor.call('saveDeo', url, function(error, result) {
-      if (!error) {
-        var mp4Link = result.data.formats[1].url;
-        Session.set('videoPreviewSource', mp4Link);
-        console.log(mp4Link);
-        return console.log(result);
-      }
-    });
+    if (extensionList.indexOf(extension) > -1) {
+        Session.set('videoPreviewSource', url);
+    } else {
+      Meteor.call('saveDeo', url, function(error, result) {
+        if (!error) {
+          url = result.data.formats[1].url;
+          Session.set('videoPreviewSource', url);
+          return console.log(result);
+        }
+      });
+    }
   }
 
 });

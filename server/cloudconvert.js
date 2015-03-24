@@ -8,6 +8,8 @@ if (Meteor.isServer) {
       var response = HTTP.post(api_endpoint, {
         params: inputParams
       });
+
+      return response;
     }
 
   });
