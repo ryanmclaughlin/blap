@@ -1,0 +1,4 @@
+.meteor/
+.meteor/*
+.meteor/release
+.meteor/versions
