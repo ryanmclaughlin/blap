@@ -1,0 +1,18 @@
+input[type="text"],
+input[type="url"],
+input[type="email"],
+input[type="password"],
+textarea
+  background-color: $grey
+  border: 2px solid transparent
+  padding: 1rem
+  outline: none
+
+  &:hover
+    background-color: darken($grey, 2%)
+
+  &:focus
+    background-color: lighten($grey, 1%)
+    border-color: $purple
+
+
