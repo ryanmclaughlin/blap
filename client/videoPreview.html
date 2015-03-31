@@ -1,10 +1,8 @@
 <template name="videoPreview">
   {{#if videoPreviewSource }}
-  <video class="video" width="400">
+  <video class="video" width="400" loop autoplay>
     <source id="vid-source" src="{{ videoPreviewSource }}" type="video/mp4">
   </video>
   {{/if}}
-
   <div class="slider"></div>
-
 </template>
