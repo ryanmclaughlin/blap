@@ -39,8 +39,6 @@ var initSlider = function () {
     }
   });
 
-  // slider.on('slide')
-
   slider.Link('lower').to($('.convert-form__trim-from'), updateVideoCurrentTime, wNumb({
     decimals: 1
   }));
