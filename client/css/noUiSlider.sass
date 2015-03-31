@@ -1,0 +1,39 @@
+$slider-connect-color: #A147F4
+$slider-handle-color: #C7C6D3
+$slider-height: 0.5rem
+$slider-handle-size: $slider-height * 2
+$slider-border-radius: $slider-height / 2
+
+.slider
+  margin: 1rem 0
+  width: 400px
+
+.noUi-background
+  background-color: #eeeaf1
+  border: none
+  border-radius: $slider-border-radius
+  box-shadow: none
+
+.noUi-connect
+  background-color: $slider-connect-color
+  box-shadow: none
+  border-radius: $slider-border-radius
+
+.noUi-horizontal
+  height: 0.5rem
+
+  .noUi-handle
+    background-color: $slider-handle-color
+    border: none
+    border-radius: 100%
+    box-shadow: none
+    height: $slider-handle-size
+    width: $slider-handle-size
+    top: $slider-height / -2
+    left: $slider-height / -2
+
+    &:hover
+      background-color: darken($slider-handle-color, 5%)
+
+    &:before, &:after
+      display: none
