@@ -1,7 +1,9 @@
 <template name="videoPreview">
-  <video class="video" width="400" controls>
+  {{#if videoPreviewSource }}
+  <video class="video" width="400">
     <source id="vid-source" src="{{ videoPreviewSource }}" type="video/mp4">
   </video>
+  {{/if}}
 
   <div class="slider"></div>
 
