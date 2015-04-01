@@ -13,18 +13,31 @@ Session.setDefault('videoEndTime', videoEndTime);
 
 function updateVideoCurrentTime (value) {
   var $this = $(this);
-  $this.val(value);
+  $this.val(formatTrimTime(value));
 
   $('.video').get(0).currentTime = value;
 
   if ($this.hasClass('convert-form__trim-from')) {
     Session.set('videoStartTime', value);
-    console.log(Session.get('videoStartTime'));
   } else {
     Session.set('videoEndTime', value);
-    console.log(Session.get('videoEndTime'));
   }
-};
+}
+
+function formatTrimTime(s) {
+  var time = 0;
+
+  if (s > 60) {
+    var m = Math.floor(s / 60);
+    s -= m * 60;
+
+    time = m + ':' + (s < 10 ? '0' + s : s);
+  } else {
+    time = s;
+  }
+
+  return time;
+}
 
 
 var initSlider = function () {
@@ -70,7 +83,6 @@ Template.videoPreview.events({
   'timeupdate video': function (event) {
     var video = event.target;
     if (!video.paused && video.currentTime >= Session.get('videoEndTime')) {
-      console.log('HEYY', Session.get('videoStartTime'), Session.get('videoEndTime'));
       video.currentTime = Session.get('videoStartTime');
     }
   }
