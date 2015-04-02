@@ -28,10 +28,16 @@ $slider-border-radius: $slider-height / 2
     border: none
     border-radius: 100%
     box-shadow: 0 2px rgba(0, 0, 0, 0.02)
+    cursor: -webkit-grab
+    cursor: grab
     height: $slider-handle-size
     width: $slider-handle-size
     top: $slider-height / -2
     left: $slider-height / -2
+
+    &:active
+      cursor: -webkit-grabbing
+      cursor: grabbing
 
     &:hover
       background-color: darken($slider-handle-color, 5%)
