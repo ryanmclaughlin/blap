@@ -11,7 +11,8 @@
     <input type="hidden" name="converteroptions[trim_to]" class="convert-form__trim-to">
 
     {{#if videoPreviewSource }}
-      <input type="submit" value="Blap this">
+      <input type="submit" class="button button--primary" value="Blap this">
+      <input type="button" class="button form-converter__reset" value="Reset">
     {{ else }}
       <div>
         <input class="convert-form__video-url" type="url" placeholder="Video link...">
