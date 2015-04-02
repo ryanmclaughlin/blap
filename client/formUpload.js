@@ -1,9 +1,16 @@
 
 Template.formUpload.helpers({
-
+  videoPreviewSource: function () {
+    return Session.get('videoPreviewSource');
+  }
 });
 
 Template.formUpload.events({
+  'click .form-converter__reset': function (event) {
+    Session.set('videoPreviewSource', '');
+    return false;
+  },
+
   'submit .form-converter': function (event) {
     var $form = $(event.target);
     var videoUrlInput = $form.find('.convert-form__video-url');
@@ -33,7 +40,6 @@ Template.formUpload.events({
 
     console.log(params);
 
-
     Meteor.call('cloudConvert', params, function(error, result) {
       if (!error) {
         console.log(result)
@@ -41,8 +47,6 @@ Template.formUpload.events({
         console.log(error);
       }
     });
-
-    //console.log(videoUrlInput.val());
 
     return false;
   },
