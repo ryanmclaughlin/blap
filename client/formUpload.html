@@ -10,17 +10,15 @@
     <input type="hidden" name="converteroptions[trim_from]" class="convert-form__trim-from">
     <input type="hidden" name="converteroptions[trim_to]" class="convert-form__trim-to">
 
-    <div>
-      <input class="convert-form__video-url" type="url" placeholder="Video link...">
-      or
-      <input class="convert-form__input-file" type="file" name="file">
-    </div>
-
-    <br>
-
-    <input type="submit" value="Blap this">
+    {{#if videoPreviewSource }}
+      <input type="submit" value="Blap this">
+    {{ else }}
+      <div>
+        <input class="convert-form__video-url" type="url" placeholder="Video link...">
+        or
+        <input class="convert-form__input-file" type="file" name="file">
+      </div>
+    {{/if }}
   </form>
-
-  <!-- <button id="test">Click</button> -->
 
 </template>

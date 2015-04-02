@@ -1,6 +1,8 @@
 
 Template.formUpload.helpers({
-
+  videoPreviewSource: function () {
+    return Session.get('videoPreviewSource');
+  }
 });
 
 Template.formUpload.events({
