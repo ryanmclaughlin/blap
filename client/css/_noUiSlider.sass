@@ -4,10 +4,6 @@ $slider-height: 0.5rem
 $slider-handle-size: $slider-height * 2
 $slider-border-radius: $slider-height / 2
 
-.slider
-  margin: 1rem 0
-  width: 400px
-
 .noUi-background
   background-color: #eeeaf1
   border: none
@@ -28,16 +24,11 @@ $slider-border-radius: $slider-height / 2
     border: none
     border-radius: 100%
     box-shadow: 0 2px rgba(0, 0, 0, 0.02)
-    cursor: -webkit-grab
-    cursor: grab
+    cursor: ew-resize
     height: $slider-handle-size
     width: $slider-handle-size
     top: $slider-height / -2
     left: $slider-height / -2
-
-    &:active
-      cursor: -webkit-grabbing
-      cursor: grabbing
 
     &:hover
       background-color: darken($slider-handle-color, 5%)

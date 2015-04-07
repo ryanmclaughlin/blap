@@ -15,7 +15,7 @@ function updateVideoCurrentTime (value) {
   var $this = $(this);
   $this.val(formatTrimTime(value));
 
-  $('.video').get(0).currentTime = value;
+  $('.video-preview__video').get(0).currentTime = value;
 
   if ($this.hasClass('convert-form__trim-from')) {
     Session.set('videoStartTime', value);
@@ -41,7 +41,7 @@ function formatTrimTime(s) {
 
 
 var initSlider = function () {
-  var slider = $('.slider');
+  var slider = $('.video-preview__slider');
 
   slider.noUiSlider({
     start: [videoStartTime, videoEndTime],
