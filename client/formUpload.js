@@ -8,51 +8,54 @@ Template.formUpload.helpers({
 Template.formUpload.events({
   'click .form-converter__reset': function (event) {
     Session.set('videoPreviewSource', '');
+    $('.file-inputs').show();
     return false;
   },
 
-  'submit .form-converter': function (event) {
-    var $form = $(event.target);
-    var videoUrlInput = $form.find('.convert-form__video-url');
-    var input = 'download';
-    var inputformat = 'mp4';
-    var outputformat = 'mp3';
-    var trimFrom = $form.find('.convert-form__trim-from').val() || '0';
-    var trimTo = $form.find('.convert-form__trim-to').val() || '0';
+  // 'submit .form-converter': function (event) {
+  //   var $form = $(event.target);
+  //   var videoUrlInput = $form.find('.convert-form__video-url');
+  //   var input = 'download';
+  //   var inputformat = 'mp4';
+  //   var outputformat = 'mp3';
+  //   var trimFrom = $form.find('.convert-form__trim-from').val() || '0';
+  //   var trimTo = $form.find('.convert-form__trim-to').val() || '0';
 
-    if (!videoUrlInput.val()) {
-      input = 'upload';
-      file = $form.find('.convert-form__input-file').files[0];
-    } else {
-      file = Session.get('videoPreviewSource');
-    }
+  //   if (!videoUrlInput.val()) {
+  //     input = 'upload';
+  //     file = $form.find('.convert-form__input-file').files[0];
+  //   } else {
+  //     file = Session.get('videoPreviewSource');
+  //   }
 
-    var params = {
-      'input': input,
-      'inputformat': inputformat,
-      'outputformat': outputformat,
-      'file': file,
-      'download': 'inline',
-      'converteroptions[trim_from]': trimFrom,
-      'converteroptions[trim_to]': trimTo,
-      'save': true
-    };
+  //   var params = {
+  //     'input': input,
+  //     'inputformat': inputformat,
+  //     'outputformat': outputformat,
+  //     'file': file,
+  //     'download': 'inline',
+  //     'converteroptions[trim_from]': trimFrom,
+  //     'converteroptions[trim_to]': trimTo,
+  //     'save': true
+  //   };
 
-    console.log(params);
 
-    Meteor.call('cloudConvert', params, function(error, result) {
-      if (!error) {
-        console.log(result)
-      } else {
-        console.log(error);
-      }
-    });
+  //   console.log(params);
 
-    return false;
-  },
+  //   Meteor.call('cloudConvert', params, function(error, result) {
+  //     if (!error) {
+  //       console.log(result)
+  //     } else {
+  //       console.log(error);
+  //     }
+  //   });
+
+  //   return false;
+  // },
 
   'change input[type="file"]': function (event) {
     renderVideo(event.target.files[0]);
+    $('.file-inputs').hide();
   },
 
   'change .convert-form__video-url': function (event) {
