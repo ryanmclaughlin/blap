@@ -1,7 +1,14 @@
-
 Template.formUpload.helpers({
   videoPreviewSource: function () {
     return Session.get('videoPreviewSource');
+  },
+
+  blapSourceUrl: function () {
+    return Session.get('blapSourceUrl');
+  },
+
+  blapId: function () {
+    return Session.get('blapId');
   }
 });
 
@@ -12,48 +19,45 @@ Template.formUpload.events({
     return false;
   },
 
-  // 'submit .form-converter': function (event) {
-  //   var $form = $(event.target);
-  //   var videoUrlInput = $form.find('.convert-form__video-url');
-  //   var input = 'download';
-  //   var inputformat = 'mp4';
-  //   var outputformat = 'mp3';
-  //   var trimFrom = $form.find('.convert-form__trim-from').val() || '0';
-  //   var trimTo = $form.find('.convert-form__trim-to').val() || '0';
+  'submit .form-converter': function (event) {
+    event.preventDefault();
 
-  //   if (!videoUrlInput.val()) {
-  //     input = 'upload';
-  //     file = $form.find('.convert-form__input-file').files[0];
-  //   } else {
-  //     file = Session.get('videoPreviewSource');
-  //   }
+    var file;
+    var response;
+    var $form = $(event.target);
+    var videoUrlInput = $form.find('.convert-form__video-url');
+    var trimFrom = $form.find('.convert-form__trim-from').val() || '0';
+    var trimTo = $form.find('.convert-form__trim-to').val() || '0';
 
-  //   var params = {
-  //     'input': input,
-  //     'inputformat': inputformat,
-  //     'outputformat': outputformat,
-  //     'file': file,
-  //     'download': 'inline',
-  //     'converteroptions[trim_from]': trimFrom,
-  //     'converteroptions[trim_to]': trimTo,
-  //     'save': true
-  //   };
+    if (!videoUrlInput.val()) {
+      file = $form.find('.convert-form__input-file')[0].files;
+    } else {
+      file = Session.get('videoPreviewSource');
+    }
 
+    Cloudinary.upload(file, {
+      folder: "secret",
+      resource_type: "video"
+    }, function(err, res) {
+      if (err) {
+        console.log(JSON.parse(JSON.stringify(err)));
+      } else {
+        console.log(JSON.parse(JSON.stringify(res)));
+        response = res;
 
-  //   console.log(params);
+        var blapSourceUrl = 'http://res.cloudinary.com/blap/video/upload/eo_' + trimTo + ',so_' + trimFrom + '/v1437694626/' + response.public_id + '.mp3';
+        Session.set('blapSourceUrl', blapSourceUrl);
 
-  //   Meteor.call('cloudConvert', params, function(error, result) {
-  //     if (!error) {
-  //       console.log(result)
-  //     } else {
-  //       console.log(error);
-  //     }
-  //   });
+        var newBlap = Blaps.insert({
+          url: blapSourceUrl
+        });
 
-  //   return false;
-  // },
+        Session.set('blapId', newBlap);
+      }
+    });
+  },
 
-  'change input[type="file"]': function (event) {
+  'change input[type="file"]': function () {
     renderVideo(event.target.files[0]);
     $('.file-inputs').hide();
   },

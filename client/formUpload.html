@@ -1,12 +1,6 @@
 <template name="formUpload">
 
-  <form class="form-converter" action="https://api.cloudconvert.com/convert" method="POST" enctype="multipart/form-data">
-    <input type="hidden" name="apikey" value="GUpX7rmee0taJkyGRACH282cwcguZERXcGVFeexwOlP-Vr-9riTzdcsuczLE_2KrlWj22DD9PFdqSMZbtrcv1g">
-    <input type="hidden" name="input" value="upload">
-    <input type="hidden" name="download" value="inline">
-    <input type="hidden" name="save" value="true">
-    <input type="hidden" name="inputformat" value="mp4">
-    <input type="hidden" name="outputformat" value="mp3">
+  <form class="form-converter">
     <input type="hidden" name="converteroptions[trim_from]" class="convert-form__trim-from">
     <input type="hidden" name="converteroptions[trim_to]" class="convert-form__trim-to">
 
@@ -20,6 +14,12 @@
       <input type="submit" class="button button--primary" value="Blap this">
       <input type="button" class="button form-converter__reset" value="Reset">
     {{/if }}
+
   </form>
+
+  {{#if blapId }}
+    Share this link: <a href="http://localhost:3000/blap/{{blapId}}">{{blapId}}</a>
+  {{/if }}
+
 
 </template>
