@@ -1,1 +1,1 @@
-Blaps = new Meteor.Collection('blaps');
+Jibs = new Meteor.Collection('jibs');

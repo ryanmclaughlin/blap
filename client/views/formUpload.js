@@ -1,14 +1,30 @@
+Session.setDefault('buttonLoadingClass', false);
+
 Template.formUpload.helpers({
   videoPreviewSource: function () {
     return Session.get('videoPreviewSource');
   },
 
-  blapSourceUrl: function () {
-    return Session.get('blapSourceUrl');
+  jibSourceUrl: function () {
+    return Session.get('jibSourceUrl');
   },
 
-  blapId: function () {
-    return Session.get('blapId');
+  jibId: function () {
+    return Session.get('jibId');
+  },
+
+  buttonLoadingClass: function () {
+    var isUploading = Session.get('buttonLoadingClass');
+
+    if(isUploading) {
+      return 'button--loading'
+    } else {
+      return '';
+    }
+  },
+
+  currentPath: function () {
+    return Iron.Location.get().rootUrl;
   }
 });
 
@@ -35,24 +51,28 @@ Template.formUpload.events({
       file = Session.get('videoPreviewSource');
     }
 
+    Session.set('buttonLoadingClass', true);
+
     Cloudinary.upload(file, {
       folder: "secret",
-      resource_type: "video"
+      resource_type: "video",
     }, function(err, res) {
       if (err) {
         console.log(JSON.parse(JSON.stringify(err)));
+        Session.set('buttonLoadingClass', false);
       } else {
         console.log(JSON.parse(JSON.stringify(res)));
         response = res;
 
-        var blapSourceUrl = 'http://res.cloudinary.com/blap/video/upload/eo_' + trimTo + ',so_' + trimFrom + '/v1437694626/' + response.public_id + '.mp3';
-        Session.set('blapSourceUrl', blapSourceUrl);
+        var jibSourceUrl = 'http://res.cloudinary.com/jib/video/upload/eo_' + trimTo + ',so_' + trimFrom + '/v1437694626/' + response.public_id + '.mp3';
+        Session.set('jibSourceUrl', jibSourceUrl);
 
-        var newBlap = Blaps.insert({
-          url: blapSourceUrl
+        var newJib = Jibs.insert({
+          url: jibSourceUrl
         });
 
-        Session.set('blapId', newBlap);
+        Session.set('jibId', newJib);
+        Session.set('buttonLoadingClass', false);
       }
     });
   },

@@ -1,3 +1,3 @@
 $.cloudinary.config({
-  cloud_name: 'bla'
+  cloud_name: 'jib'
 });

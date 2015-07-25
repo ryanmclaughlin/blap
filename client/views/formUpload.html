@@ -11,15 +11,14 @@
     </div>
 
     {{#if videoPreviewSource }}
-      <input type="submit" class="button button--primary" value="Blap this">
+      <input type="submit" class="button button--primary {{buttonLoadingClass}}" value="Jib this">
       <input type="button" class="button form-converter__reset" value="Reset">
     {{/if }}
 
   </form>
 
-  {{#if blapId }}
-    Share this link: <a href="http://localhost:3000/blap/{{blapId}}">{{blapId}}</a>
+  {{#if jibId }}
+    Share this link: <a href="/jib/{{jibId}}">{{currentPath}}/jib/{{jibId}}</a>
   {{/if }}
-
 
 </template>
